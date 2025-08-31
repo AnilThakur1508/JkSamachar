@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <div *ngIf="posts.length > 0; else noPosts">
+    <div id="postCarousel"
+         class="carousel slide"
+         data-bs-ride="carousel"
+         data-bs-interval="10000"
+         data-bs-pause="false">
+
+      <div class="carousel-inner">
+        <div class="carousel-item"
+             *ngFor="let post of posts; let i = index"
+             [class.active]="i === 0">
+          <div class="card h-100 shadow-sm">
+            <img [src]="post.imageUrl"
+                 [alt]="post.title || 'image'"
+                 class="card-img-top"
+                 style="height: 300px; object-fit: cover;" />
+
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.description }}</p>
+            </div>
+
+            <div class="card-footer text-muted small">
+              {{ post.time }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls (optional) -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  <ng-template #noPosts>
+    <div class="alert alert-info text-center mt-4">
+      No items to display.
+    </div>
+  </ng-template>
+</div>
